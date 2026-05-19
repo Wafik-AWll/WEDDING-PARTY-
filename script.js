@@ -73,7 +73,7 @@ const io = new IntersectionObserver((entries) => {
 document.querySelectorAll('.in-view, .g-item, .count-cell, .std-poster').forEach(el => io.observe(el));
 
 // Countdown
-const TARGET = new Date('2026-11-30T18:00:00').getTime();
+const TARGET = new Date('2026-05-21T20:00:00').getTime();
 const cells = [
   { l: 'days' }, { l: 'hours' }, { l: 'minutes' }, { l: 'seconds' }
 ];
