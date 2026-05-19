@@ -74,17 +74,60 @@ document.querySelectorAll('.in-view, .g-item, .count-cell, .std-poster').forEach
 
 // Countdown
 const TARGET = new Date('2026-05-21T20:00:00').getTime();
+
 const cells = [
-  { l: 'days' }, { l: 'hours' }, { l: 'minutes' }, { l: 'seconds' }
+  { l: 'days' },
+  { l: 'hours' },
+  { l: 'minutes' },
+  { l: 'seconds' }
 ];
+
 const grid = document.getElementById('countGrid');
+
 cells.forEach((c, i) => {
   const el = document.createElement('div');
+
   el.className = 'count-cell in-view';
   el.style.transitionDelay = (0.2 + i * 0.08) + 's';
-  el.innerHTML = `<div class="num" data-k="${c.l}">00</div><div class="lbl">${c.l}</div>`;
+
+  el.innerHTML = `
+    <div class="num" data-k="${c.l}">00</div>
+    <div class="lbl">${c.l}</div>
+  `;
+
   grid.appendChild(el);
-  io.observe(el);
+});
+
+function updateCountdown() {
+
+  const now = new Date().getTime();
+  const distance = TARGET - now;
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  const hours = Math.floor(
+    (distance % (1000 * 60 * 60 * 24)) /
+    (1000 * 60 * 60)
+  );
+
+  const minutes = Math.floor(
+    (distance % (1000 * 60 * 60)) /
+    (1000 * 60)
+  );
+
+  const seconds = Math.floor(
+    (distance % (1000 * 60)) / 1000
+  );
+
+  document.querySelector('[data-k="days"]').textContent = days;
+  document.querySelector('[data-k="hours"]').textContent = hours;
+  document.querySelector('[data-k="minutes"]').textContent = minutes;
+  document.querySelector('[data-k="seconds"]').textContent = seconds;
+}
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
 });
 function tick() {
   const t = TARGET - Date.now();
