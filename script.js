@@ -4,7 +4,7 @@ const prePoster = document.getElementById('prePoster');
 const video     = document.getElementById('preVideo-el');
 
 // Music initialization
-const songPath = 'assets/Alex Warren - Ordinary (Wedding Version) [Official Music Video] (mp3cut.net).mp3';
+const songPath = 'assets/Ramy.mp3';
 const audio = new Audio(songPath);
 audio.loop = true;
 let musicStarted = false;
@@ -128,19 +128,6 @@ function updateCountdown() {
 updateCountdown();
 
 setInterval(updateCountdown, 1000);
-});
-function tick() {
-  const t = TARGET - Date.now();
-  const d = Math.max(0, Math.floor(t / 86400000));
-  const h = Math.max(0, Math.floor((t / 3600000) % 24));
-  const m = Math.max(0, Math.floor((t / 60000) % 60));
-  const s = Math.max(0, Math.floor((t / 1000) % 60));
-  const map = { days: d, hours: h, minutes: m, seconds: s };
-  document.querySelectorAll('[data-k]').forEach(el => {
-    el.textContent = String(map[el.dataset.k]).padStart(2, '0');
-  });
-}
-tick(); setInterval(tick, 1000);
 
 // Venue parallax
 const venueBg = document.querySelector('[data-parallax]');
